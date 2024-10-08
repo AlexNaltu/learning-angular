@@ -14,9 +14,9 @@ import { AdminComponent } from './components/admin/admin.component';
     AdminComponent,
   ],
   template: `<div>
-    <todo-list-item></todo-list-item>
-    <sign-up-form></sign-up-form>
-    <app-admin></app-admin>
+    <todo-list-item />
+    <sign-up-form />
+    <app-admin />
   </div>`,
 })
 export class AppComponent {

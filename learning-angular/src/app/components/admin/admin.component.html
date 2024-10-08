@@ -2,4 +2,6 @@
   @for (admin of adminList; track admin.name) {
   <li>{{ admin.name }} age: {{ admin.age }}</li>
   }
+  <p>{{ announcement }}</p>
+  <button (click)="transformText()">Click me</button>
 </ul>
