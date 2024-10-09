@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, output, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-expandable-panel',
@@ -29,5 +30,11 @@ export class ExpandablePanelComponent {
 
   savePanelState() {
     console.log('Panel state saved');
+  }
+
+  nameChange = output<string>({ alias: 'NewName' });
+
+  onNameChange(newName: string) {
+    this.nameChange.emit(newName);
   }
 }
