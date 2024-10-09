@@ -4,6 +4,7 @@ import { TodoListItemComponent } from './components/todo-list-item.component';
 import { SignUpFormComponent } from './components/sign-up-form.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ExpandablePanelComponent } from './components/expandable-panel/expandable-panel.component';
+import { CustomHeaderComponent } from './components/custom-header-card/custom-header-card.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { ExpandablePanelComponent } from './components/expandable-panel/expandab
     SignUpFormComponent,
     AdminComponent,
     ExpandablePanelComponent,
+    CustomHeaderComponent,
   ],
   template: `<div>
     <todo-list-item />
@@ -22,6 +24,7 @@ import { ExpandablePanelComponent } from './components/expandable-panel/expandab
     <app-expandable-panel
       ><h1 ngProjectAs="card-title">Hello</h1></app-expandable-panel
     >
+    <custom-header />
   </div>`,
 })
 export class AppComponent {
