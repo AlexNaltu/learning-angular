@@ -19,7 +19,9 @@ import { ExpandablePanelComponent } from './components/expandable-panel/expandab
     <todo-list-item />
     <sign-up-form />
     <app-admin />
-    <app-expandable-panel />
+    <app-expandable-panel
+      ><h1 ngProjectAs="card-title">Hello</h1></app-expandable-panel
+    >
   </div>`,
 })
 export class AppComponent {
