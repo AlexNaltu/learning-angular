@@ -1,4 +1,4 @@
-import { Component, EventEmitter, output, Output } from '@angular/core';
+import { Component, EventEmitter, output, Output, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -8,8 +8,16 @@ import { Observable } from 'rxjs';
   templateUrl: './expandable-panel.component.html',
   styleUrl: './expandable-panel.component.css',
   outputs: ['new-closed-panel'],
+  host: {
+    role: 'expandable-panel',
+    '[class.active]': 'isActive()',
+  },
 })
 export class ExpandablePanelComponent {
+  value: number = 0;
+  isActive = signal(false);
+  isDisabled: boolean = false;
+
   @Output('new-closed-panel') closePanel = new EventEmitter<number>();
 
   onClosePanel() {
