@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TodoListItemComponent } from './components/todo-list-item.component';
 import { SignUpFormComponent } from './components/sign-up-form.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -18,17 +18,10 @@ import { DetailsComponent } from './components/details/details.component';
     ExpandablePanelComponent,
     CustomHeaderComponent,
     DetailsComponent,
+    RouterLink,
+    RouterLinkActive,
   ],
-  template: `<div>
-    <todo-list-item />
-    <sign-up-form [name]="userName" />
-    <app-admin />
-    <app-expandable-panel
-      ><h1 ngProjectAs="card-title">Hello</h1></app-expandable-panel
-    >
-    <custom-header />
-    <app-details />
-  </div>`,
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
   title = 'learning-angular';
