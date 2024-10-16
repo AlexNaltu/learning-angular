@@ -11,6 +11,14 @@
     >Go To dashboard</a
   >
 </div>
+
+@for (post of posts; track post.id) {
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }}</p>
+} @empty {
+<p>No posts found</p>
+}
+
 <div>
   <router-outlet />
 </div>
