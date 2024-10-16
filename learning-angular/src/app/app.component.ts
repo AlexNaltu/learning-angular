@@ -50,4 +50,17 @@ export class AppComponent {
       },
     });
   }
+
+  addPost() {
+    this.postService
+      .createPost({ title: 'New Post', body: 'New Post Body' })
+      .subscribe({
+        next: (data: any) => {
+          console.log('Post created', data);
+        },
+        error: (error: any) => {
+          console.error('There was an error!', error);
+        },
+      });
+  }
 }

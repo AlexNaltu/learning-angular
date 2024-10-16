@@ -12,6 +12,8 @@
   >
 </div>
 
+<button (click)="addPost()">Create Post</button>
+
 @for (post of posts; track post.id) {
 <h1>{{ post.title }}</h1>
 <p>{{ post.body }}</p>
