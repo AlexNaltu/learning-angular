@@ -8,11 +8,6 @@ import { SettingsProfileComponent } from './profile/settings-profile.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: 'products',
     loadComponent: () =>
       import('./products/products.component').then((c) => c.ProductsComponent),
