@@ -1,5 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
+
+const httpsOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'my-auth-token',
+  }),
+};
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +20,12 @@ export class PostsService {
   http = inject(HttpClient);
 
   getPosts() {
-    return this.http.get<any>(this.apiUrl);
+    return this.http.get<any>(this.apiUrl).pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: any) {
+    console.log(error);
+    return throwError(() => new Error('An error occurred'));
   }
 
   getPost(id: number) {
@@ -20,7 +33,7 @@ export class PostsService {
   }
 
   createPost(post: any) {
-    return this.http.post(this.apiUrl, post);
+    return this.http.post(this.apiUrl, post, httpsOptions);
   }
 
   updatePost(post: any) {
@@ -29,5 +42,10 @@ export class PostsService {
 
   deletePost(id: number) {
     return this.http.delete(this.apiUrl + '/' + id);
+  }
+
+  getPostsByParams(userId: number) {
+    let params = new HttpParams().set('userId', userId);
+    return this.http.get(this.apiUrl, { params });
   }
 }

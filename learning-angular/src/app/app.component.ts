@@ -41,8 +41,8 @@ export class AppComponent {
   posts: any[] = [];
 
   constructor() {
-    this.postService.getPosts().subscribe({
-      next: (data) => {
+    this.postService.getPostsByParams(1).subscribe({
+      next: (data: any) => {
         this.posts = data;
       },
       error: (error) => {
