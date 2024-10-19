@@ -1,26 +1,31 @@
-<div class="main">
-  <a routerLink="/products" routerLinkActive="active">Go To Products</a>
-  <a
-    routerLink="/settings"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-    >Go To settings</a
-  >
-  <a routerLink="/dashboard" routerLinkActive="active">Go To dashboard</a>
-  <a routerLink="/settings/profile" routerLinkActive="active"
-    >Go To dashboard</a
-  >
+<div>
+  <input
+    type="text"
+    placeholder="New Task"
+    [(ngModel)]="newTask"
+    (keyup.enter)="addTask()"
+  />
+  <button (click)="addTask()">Add Task</button>
 </div>
 
-<button (click)="addPost()">Create Post</button>
-
-@for (post of posts; track post.id) {
-<h1>{{ post.title }}</h1>
-<p>{{ post.body }}</p>
-} @empty {
-<p>No posts found</p>
-}
+<div>
+  <ul>
+    <li *ngFor="let task of tasks()">
+      <input
+        type="checkbox"
+        [checked]="task.completed"
+        (change)="toggleTaskCompletion(task)"
+      />
+      <span [class.completed]="task.completed">{{ task.title }}</span>
+      <button (click)="deleteTask(task)">Delete</button>
+    </li>
+  </ul>
+</div>
 
 <div>
-  <router-outlet />
+  <p>Completed Tasks: {{ completedTasksCount() }}</p>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
 </div>
