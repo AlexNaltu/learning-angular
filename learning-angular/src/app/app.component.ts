@@ -3,6 +3,7 @@ import {
   computed,
   inject,
   input,
+  OnInit,
   Signal,
   signal,
   WritableSignal,
@@ -19,6 +20,7 @@ import { CommonModule } from '@angular/common';
 import { PostsService } from './posts.service';
 import { FormsModule } from '@angular/forms';
 import {
+  BehaviorSubject,
   concatMap,
   delay,
   exhaustMap,
@@ -33,6 +35,13 @@ interface Task {
   title: string;
   completed: boolean;
 }
+
+const users = [
+  { id: 1, name: 'John Doe' },
+  { id: 2, name: 'Jane Doe' },
+  { id: 3, name: 'Alice' },
+  { id: 4, name: 'Bob' },
+];
 
 @Component({
   selector: 'app-root',
@@ -53,7 +62,22 @@ interface Task {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  user$ = new BehaviorSubject<{ id: string; name: string } | null>(null);
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.user$.next({ id: '1', name: 'John Doe' });
+    }, 2000);
+    this.user$.subscribe((user) => {
+      console.log('User:', user);
+    });
+  }
+
+  //of converts plain data to a stream
+  users$ = of(users);
+  usernames$ = this.users$.pipe(map((users) => users.map((user) => user.name)));
+
   title = 'learning-angular';
 
   userName: string = 'John Doe';
@@ -69,11 +93,6 @@ export class AppComponent {
   array$ = from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).pipe(map((x) => x * 3));
 
   constructor() {
-    from([1, 2, 3, 4])
-      .pipe(exhaustMap((x) => of(x)))
-      .pipe(delay(1000))
-      .subscribe(console.log);
-
     this.postService.getPostsByParams(1).subscribe({
       next: (data: any) => {
         this.posts = data;
